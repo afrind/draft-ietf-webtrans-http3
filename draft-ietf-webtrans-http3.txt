@@ -5,10 +5,10 @@
 Network Working Group                                        A. Frindell
 Internet-Draft                                                  Facebook
 Intended status: Standards Track                              E. Kinnear
-Expires: 22 September 2022                                    Apple Inc.
+Expires: 29 December 2022                                     Apple Inc.
                                                              V. Vasiliev
                                                                   Google
-                                                           21 March 2022
+                                                            27 June 2022
 
 
                         WebTransport over HTTP/3
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 September 2022.
+   This Internet-Draft will expire on 29 December 2022.
 
 Copyright Notice
 
@@ -188,7 +188,7 @@ Table of Contents
 3.3.  Creating a New Session
 
    As WebTransport sessions are established over HTTP/3, they are
-   identified using the https URI scheme [RFC7230].
+   identified using the https URI scheme ([HTTP], Section 4.2.2).
 
    In order to create a new WebTransport session, a client can send an
    HTTP CONNECT request.  The :protocol pseudo-header field ([RFC8441])
@@ -200,11 +200,11 @@ Table of Contents
    Upon receiving an extended CONNECT request with a :protocol field set
    to webtransport, the HTTP/3 server can check if it has a WebTransport
    server associated with the specified :authority and :path values.  If
-   it does not, it SHOULD reply with status code 404 (Section 6.5.4,
-   [RFC7231]).  If it does, it MAY accept the session by replying with a
-   2xx series status code, as defined in Section 15.3 of [SEMANTICS].
-   The WebTransport server MUST verify the Origin header to ensure that
-   the specified origin is allowed to access the server in question.
+   it does not, it SHOULD reply with status code 404 (Section 15.5.4,
+   [HTTP]).  If it does, it MAY accept the session by replying with a
+   2xx series status code, as defined in Section 15.3 of [HTTP].  The
+   WebTransport server MUST verify the Origin header to ensure that the
+   specified origin is allowed to access the server in question.
 
    From the client's perspective, a WebTransport session is established
    when the client receives a 2xx response.  From the server's
@@ -485,7 +485,8 @@ Table of Contents
 8.1.  Upgrade Token Registration
 
    The following entry is added to the "Hypertext Transfer Protocol
-   (HTTP) Upgrade Token Registry" registry established by [RFC7230]:
+   (HTTP) Upgrade Token Registry" registry established by Section 16.7
+   of [HTTP].
 
    The "webtransport" label identifies HTTP/3 used as a protocol for
    WebTransport:
@@ -574,22 +575,25 @@ Table of Contents
 
 9.1.  Normative References
 
-   [HTTP-DATAGRAM]
-              Schinazi, D. and L. Pardue, "Using Datagrams with HTTP",
-              Work in Progress, Internet-Draft, draft-ietf-masque-h3-
-              datagram-06, 4 March 2022,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-masque-
-              h3-datagram-06>.
+   [HTTP]     Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
+              Ed., "HTTP Semantics", STD 97, RFC 9110,
+              DOI 10.17487/RFC9110, June 2022,
+              <https://www.rfc-editor.org/rfc/rfc9110>.
 
-   [HTTP3]    Bishop, M., Ed., "Hypertext Transfer Protocol Version 3
-              (HTTP/3)", Work in Progress, Internet-Draft, draft-ietf-
-              quic-http, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-quic-http>.
+   [HTTP-DATAGRAM]
+              Schinazi, D. and L. Pardue, "HTTP Datagrams and the
+              Capsule Protocol", Work in Progress, Internet-Draft,
+              draft-ietf-masque-h3-datagram-11, 17 June 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-masque-
+              h3-datagram-11>.
+
+   [HTTP3]    Bishop, M., Ed., "HTTP/3", RFC 9114, DOI 10.17487/RFC9114,
+              June 2022, <https://www.rfc-editor.org/rfc/rfc9114>.
 
    [OVERVIEW] Vasiliev, V., "The WebTransport Protocol Framework", Work
               in Progress, Internet-Draft, draft-ietf-webtrans-overview-
-              latest, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              webtrans-overview-latest>.
+              03, 7 March 2022, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-webtrans-overview-03>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -609,16 +613,6 @@ Table of Contents
               Codes", RFC 6585, DOI 10.17487/RFC6585, April 2012,
               <https://www.rfc-editor.org/rfc/rfc6585>.
 
-   [RFC7230]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
-              Protocol (HTTP/1.1): Message Syntax and Routing",
-              RFC 7230, DOI 10.17487/RFC7230, June 2014,
-              <https://www.rfc-editor.org/rfc/rfc7230>.
-
-   [RFC7231]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
-              Protocol (HTTP/1.1): Semantics and Content", RFC 7231,
-              DOI 10.17487/RFC7231, June 2014,
-              <https://www.rfc-editor.org/rfc/rfc7231>.
-
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
@@ -631,13 +625,6 @@ Table of Contents
               Multiplexed and Secure Transport", RFC 9000,
               DOI 10.17487/RFC9000, May 2021,
               <https://www.rfc-editor.org/rfc/rfc9000>.
-
-   [SEMANTICS]
-              Fielding, R. T., Nottingham, M., and J. Reschke, "HTTP
-              Semantics", Work in Progress, Internet-Draft, draft-ietf-
-              httpbis-semantics-19, 12 September 2021,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-
-              semantics-19>.
 
 9.2.  Informative References
 
